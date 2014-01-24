@@ -13,6 +13,7 @@ var FB = function () {
         , parseOAuthApiResponse
         , setAccessToken
         , getAccessToken
+        , extendAccessToken
         , parseSignedRequest
         , base64UrlDecode
         , log
@@ -349,6 +350,24 @@ var FB = function () {
 
     setAccessToken = function (accessToken) {
         options({'accessToken': accessToken});
+    };
+
+    extendAccessToken = function (callback) {
+        var extendedTokenURL = "https://graph.facebook.com/oauth/access_token?" +
+            "client_id=" + options('appId') +
+            "&client_secret=" + options('appSecret') +
+            "&grant_type=fb_exchange_token" +
+            "&fb_exchange_token=" + options('accessToken');
+
+        request(extendedTokenURL, function (err, response, body) {
+            var data = body.split("&"), result = {};
+            for (var i=0; i < data.length; i++) {
+                var item = data[i].split("=");
+                result[item[0]] = item[1];
+            }
+            setAccessToken(result.access_token);
+            callback(result.access_token);
+        });
     };
 
     /**
