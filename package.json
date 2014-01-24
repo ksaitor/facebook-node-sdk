@@ -1,5 +1,6 @@
 {
   "author": "Thuzi LLC <pshrestha@thuzi.com> (https://github.com/Thuzi)",
+  "contributor": "Raman Shalupau <raman.shalupau@gmail.com> (https://github.com/ksaitor)",
   "name": "fb",
   "description": "NodeJS Library for Facebook",
   "keywords": [
@@ -7,14 +8,14 @@
     "fb",
     "graph"
   ],
-  "version": "0.6.2",
+  "version": "1.6.2",
   "homepage": "https://github.com/Thuzi/facebook-node-sdk",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Thuzi/facebook-node-sdk.git"
+    "url": "git://github.com/ksaitor/facebook-node-sdk.git"
   },
   "engines": {
-    "node": ">=0.6.9"
+    "node": ">=0.10.0"
   },
   "dependencies": {
     "request": "2.9.x",

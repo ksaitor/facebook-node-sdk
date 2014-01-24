@@ -5,6 +5,7 @@ With facebook-node-sdk you can now easily write the same code and share between 
 This SDK will report usage of which AppID is using it directly to Facebook.
 
 **Author:** [Thuzi](http://www.thuzi.com)
+**Contributor:** [Ksairo](https://github.com/ksaitor)
 
 **License:** Apache v2
 
@@ -154,7 +155,7 @@ var FB = require('fb');
 FB.setAccessToken('access_token');
 
 var extractEtag;
-FB.api('', 'post', { 
+FB.api('', 'post', {
     batch: [
         { method: 'get', relative_url: '4' },
         { method: 'get', relative_url: 'me/friends?limit=50' },
@@ -238,7 +239,7 @@ FB.api('', 'post', {
         console.log('no updates');
     }
 
-    // check if dependency executed successfully    
+    // check if dependency executed successfully
     if(res[6] === null) {
         // then check if the result it self doesn't have any errors.
         if(res7.error) {
@@ -311,7 +312,7 @@ FB.api('oauth/access_token', {
         console.log(!res ? 'error occurred' : res.error);
         return;
     }
-    
+
     var accessToken = res.access_token;
 });
 ```
@@ -376,7 +377,7 @@ FB.api('oauth/access_token', {
         console.log(!res ? 'error occurred' : res.error);
         return;
     }
-    
+
     var accessToken = res.access_token;
     var expires = res.expires ? res.expires : 0;
 });
@@ -414,7 +415,7 @@ FB.api({ method: 'stream.publish', message: message }, function (res) {
         console.log(!res ? 'error occurred' : res.error_msg);
         return;
     }
-    
+
     console.log(res);
 });
 ```
@@ -430,7 +431,7 @@ FB.api({ method: 'stream.remove', post_id: postId }, function (res) {
         console.log(!res ? 'error occurred' : res.error_msg);
         return;
     }
-    
+
     console.log(res);
 });
 ```
@@ -581,7 +582,7 @@ FB.api('/me', function (res) {
 
 *This is a non-standard api and does not exist in the official client side FB JS SDK.*
 
-`FB.napi` takes the same input as `FB.api`. Only the callback parameters is different. In the original 
+`FB.napi` takes the same input as `FB.api`. Only the callback parameters is different. In the original
 `FB.api`, the callback expects one parameter which is the response. In `FB.napi` the callback expects two
 parameters instead of one and follows the node standards. The first parameter is an error which is always
 of type `FB.FacebookApiException` and the second parameter is the same response as in `FB.api`.
