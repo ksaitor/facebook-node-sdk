@@ -1,4 +1,4 @@
-var FB = function () {
+var FB = function (initOpts) {
     var   request = require('request')
         , crypto  = require('crypto')
         , version = require(require('path').resolve(__dirname, 'package.json')).version
@@ -635,6 +635,7 @@ var FB = function () {
         }
     };
 
+    options(initOpts);
     return {
           api: api
         , napi: napi // this method does not exist in fb js sdk
