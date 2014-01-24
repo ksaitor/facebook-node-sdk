@@ -91,6 +91,11 @@ var FB = function () {
             , 'video.getuploadlimits': true
         };
 
+    function isFunction(functionToCheck) {
+        var getType = {};
+        return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+    }
+
     /**
      *
      * @access public
@@ -352,12 +357,20 @@ var FB = function () {
         options({'accessToken': accessToken});
     };
 
-    extendAccessToken = function (callback) {
+    extendAccessToken = function () {
+        var token = options('accessToken'),
+            callback = function () {};
+
+        if (typeof arguments[0] === 'string') {
+            token = arguments[0];
+            callback = arguments[1] || callback;
+        }
+
         var extendedTokenURL = "https://graph.facebook.com/oauth/access_token?" +
             "client_id=" + options('appId') +
             "&client_secret=" + options('appSecret') +
             "&grant_type=fb_exchange_token" +
-            "&fb_exchange_token=" + options('accessToken');
+            "&fb_exchange_token=" + token;
 
         request(extendedTokenURL, function (err, response, body) {
             var data = body.split("&"), result = {};
@@ -627,6 +640,7 @@ var FB = function () {
         , napi: napi // this method does not exist in fb js sdk
         , getAccessToken: getAccessToken
         , setAccessToken: setAccessToken // this method does not exist in fb js sdk
+        , extendAccessToken: extendAccessToken
         , parseSignedRequest : parseSignedRequest // this method does not exist in fb js sdk
         , getLoginUrl: getLoginUrl // this method does not exist in fb js sdk
         , options: options // this method does not exist in the fb js sdk
