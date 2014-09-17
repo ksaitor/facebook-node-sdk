@@ -359,11 +359,11 @@ var FB = function (initOpts) {
 
     extendAccessToken = function () {
         var token = options('accessToken'),
-            callback = function () {};
+            callback = arguments[0] || function () {};
 
         if (typeof arguments[0] === 'string') {
             token = arguments[0];
-            callback = arguments[1] || callback;
+            callback = arguments[1] || function () {};
         }
 
         var extendedTokenURL = "https://graph.facebook.com/oauth/access_token?" +
