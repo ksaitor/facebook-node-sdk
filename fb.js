@@ -236,6 +236,12 @@ var FB = function (initOpts) {
             params.access_token = options('accessToken');
         }
 
+        // if (options('version')) {
+        //     path = options('version') + '/' + path;
+        // } else {
+        //     path = 'v2.1/' + path;
+        // }
+
         if(domain === 'graph') {
             uri = 'https://graph.facebook.com/' + path;
             isOAuthRequest = /^oauth.*/.test('oauth/');
