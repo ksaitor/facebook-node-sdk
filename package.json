@@ -1,6 +1,4 @@
 {
-  "author": "Thuzi LLC <pshrestha@thuzi.com> (https://github.com/Thuzi)",
-  "contributor": "Raman Shalupau <raman.shalupau@gmail.com> (https://github.com/ksaitor)",
   "name": "fb",
   "description": "NodeJS Library for Facebook",
   "keywords": [
@@ -8,7 +6,17 @@
     "fb",
     "graph"
   ],
-  "version": "1.6.3",
+  "author": {
+    "name": "Thuzi LLC",
+    "email": "pshrestha@thuzi.com",
+    "url": "https://github.com/Thuzi"
+  },
+  "contributor": {
+    "name": "Raman Shalupau",
+    "email": "raman.shalupau@gmail.com",
+    "url": "https://github.com/ksaitor"
+  },
+  "version": "1.6.4",
   "homepage": "https://github.com/Thuzi/facebook-node-sdk",
   "repository": {
     "type": "git",
@@ -31,5 +39,9 @@
   "scripts": {
     "test": "node ./node_modules/mocha/bin/mocha --recursive --reporter spec",
     "testw": "node ./node_modules/mocha/bin/mocha --recursive --watch --reporter spec"
+  },
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/ksaitor/facebook-node-sdk/issues"
   }
 }

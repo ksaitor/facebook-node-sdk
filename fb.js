@@ -236,11 +236,6 @@ var FB = function (initOpts) {
             params.access_token = options('accessToken');
         }
 
-        // if (options('version')) {
-        //     path = options('version') + '/' + path;
-        // } else {
-        //     path = 'v2.1/' + path;
-        // }
 
         if(domain === 'graph') {
             uri = 'https://graph.facebook.com/' + path;
@@ -373,19 +368,31 @@ var FB = function (initOpts) {
         }
 
         var extendedTokenURL = "https://graph.facebook.com/oauth/access_token?" +
-            "client_id=" + options('appId') +
+            "grant_type=fb_exchange_token" +
+            "&client_id=" + options('appId') +
             "&client_secret=" + options('appSecret') +
-            "&grant_type=fb_exchange_token" +
             "&fb_exchange_token=" + token;
 
-        request(extendedTokenURL, function (err, response, body) {
-            var data = body.split("&"), result = {};
+        request(extendedTokenURL, function (err, res, body) {
+            var data = body.split("&"), result = {}, err = null;
+
             for (var i=0; i < data.length; i++) {
                 var item = data[i].split("=");
                 result[item[0]] = item[1];
             }
-            setAccessToken(result.access_token);
+
+            if (+res.statusCode !== 200) {
+                try {
+                    result = JSON.parse(body) || result;
+                } catch (e) { console.trace(e) };
+                err = result.error;
+            }
+
+
             callback(result.access_token);
+            if (+res.statusCode === 200) {
+                setAccessToken(result.access_token);
+            }
         });
     };
 
