@@ -374,7 +374,11 @@ var FB = function (initOpts) {
             "&fb_exchange_token=" + token;
 
         request(extendedTokenURL, function (err, res, body) {
-            var data = body.split("&"), result = {}, err = null;
+            if (err || !body) {
+                console.error(arguments);
+                return callback(null);
+            }
+            var data = body.split("&"), result = {};
 
             for (var i=0; i < data.length; i++) {
                 var item = data[i].split("=");
