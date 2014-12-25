@@ -25,6 +25,7 @@ var FB = function (initOpts) {
             , 'appId': null
             , 'appSecret': null
             , 'timeout': null
+            , 'graphVersion': '1.0'
             , 'scope':  null
             , 'redirectUri': null
         }
@@ -236,9 +237,8 @@ var FB = function (initOpts) {
             params.access_token = options('accessToken');
         }
 
-
         if(domain === 'graph') {
-            uri = 'https://graph.facebook.com/' + path;
+            uri = 'https://graph.facebook.com/v' + options('graphVersion') + '/' + path;
             isOAuthRequest = /^oauth.*/.test('oauth/');
         }
         else if(domain == 'api') {
@@ -367,7 +367,9 @@ var FB = function (initOpts) {
             callback = arguments[1] || function () {};
         }
 
-        var extendedTokenURL = "https://graph.facebook.com/oauth/access_token?" +
+        var extendedTokenURL = "https://graph.facebook.com/v" +
+            options('graphVersion') +
+            "/oauth/access_token?" +
             "grant_type=fb_exchange_token" +
             "&client_id=" + options('appId') +
             "&client_secret=" + options('appSecret') +
